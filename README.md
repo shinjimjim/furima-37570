@@ -11,9 +11,7 @@
 | firstname          | string  | null: false               |
 | lastname_reading   | string  | null: false               |
 | firstname_reading  | string  | null: false               |
-| user_year_id       | integer | null: false               |
-| user_month_id      | integer | null: false               |
-| user_day_id        | integer | null: false               |
+| birthday_id        | date    | null: false               |
 
 ### Association
 
