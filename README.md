@@ -11,7 +11,9 @@
 | firstname          | string  | null: false               |
 | lastname_reading   | string  | null: false               |
 | firstname_reading  | string  | null: false               |
-| birthday           | date    | null: false               |
+| user_year_id       | integer | null: false               |
+| user_month_id      | integer | null: false               |
+| user_day_id        | integer | null: false               |
 
 ### Association
 
@@ -20,17 +22,17 @@
 
 ## itemsテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| name          | string     | null: false                    |
-| content       | text       | null: false                    |
-| category_id   | integer    | null: false                    |
-| condition_id  | integer    | null: false                    |
-| burden_id     | integer    | null: false                    |
-| prefecture_id | integer    | null: false                    |
-| days_id       | integer    | null: false                    |
-| price         | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| name            | string     | null: false                    |
+| content         | text       | null: false                    |
+| category_id     | integer    | null: false                    |
+| condition_id    | integer    | null: false                    |
+| burden_id       | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| delivery_day_id | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -48,7 +50,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_many :addresses
+- has_one :address
 
 ## addressesテーブル
 
@@ -58,8 +60,8 @@
 | prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
 | house_number     | string     | null: false                    |
-| building_name    | string     | null: false                    |
-| telephone_number | integer    | null: false                    |
+| building_name    | string     |                                |
+| telephone_number | string     | null: false                    |
 | buy              | references | null: false, foreign_key: true |
 
 ### Association
