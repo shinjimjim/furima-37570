@@ -3,4 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+    validates :password,          format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "is invalid. Input half-width alphanumerical characters."}
+ 
+   with_options presence: true do
+    validates :nickname
+    validates :lastname,          format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+    validates :firstname,         format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+    validates :lastname_reading,  format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
+    validates :firstname_reading, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
+    validates :birthday         
+  end
 end
