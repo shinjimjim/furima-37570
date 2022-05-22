@@ -46,9 +46,21 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
-      it 'passwordが半角英数混合でないと保存できないこと' do
+      it 'passwordが半角数字のみでは保存できないこと' do
         @user.password = '000000'
         @user.password_confirmation = '000000'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumerical characters.")
+      end
+      it 'passwordが半角英字のみでは保存できないこと' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumerical characters.")
+      end
+      it 'passwordが全角では保存できないこと' do
+        @user.password = '１１１ａａａ'
+        @user.password_confirmation = '１１１ａａａ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumerical characters.")
       end
@@ -81,7 +93,7 @@ RSpec.describe User, type: :model do
       it 'lastname_readingが空だと保存できないこと' do
         @user.lastname_reading = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Lastname reading can't be blank","Lastname reading is invalid. Input full-width katakana characters.")
+        expect(@user.errors.full_messages).to include("Lastname reading can't be blank")
       end
       it 'lastname_readingが全角（カタカナ）でないと保存できないこと' do
         @user.lastname_reading = 'test'
@@ -91,7 +103,7 @@ RSpec.describe User, type: :model do
       it 'firstname_readingが空だと保存できないこと' do
         @user.firstname_reading = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Firstname reading can't be blank","Firstname reading is invalid. Input full-width katakana characters.")
+        expect(@user.errors.full_messages).to include("Firstname reading can't be blank")
       end
       it 'firstname_readingが全角（カタカナ）でないと保存できなこと' do
         @user.firstname_reading = 'test'
