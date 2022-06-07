@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe BuyAddress, type: :model do
   describe '配送先情報の保存' do
     before do
-      @buy_address = FactoryBot.build(:buy_address)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @buy_address = FactoryBot.build(:buy_address, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
 
     context '内容に問題がない場合' do
@@ -54,6 +57,16 @@ RSpec.describe BuyAddress, type: :model do
       end
       it 'telephone_numberが12桁以上あると保存できないこと' do
         @buy_address.telephone_number = '090123456789'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Telephone number is invalid")
+      end
+      it 'telephone_numberが9桁以下だと保存できないこと' do
+        @buy_address.telephone_number = '090123456'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Telephone number is invalid")
+      end
+      it 'telephone_numberが半角数字以外だと保存できないこと' do
+        @buy_address.telephone_number = '０９０１２３４５６７８'
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Telephone number is invalid")
       end
