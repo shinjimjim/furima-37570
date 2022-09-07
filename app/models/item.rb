@@ -12,6 +12,7 @@ class Item < ApplicationRecord
   has_many_attached :images
 
   validates :images, :name, :content, presence: true
+  validates :images, length: { minimum: 1, maximum: 5, message: "は1枚以上5枚以下にしてください" }
   validates :category_id, :condition_id, :burden_id, :prefecture_id, :delivery_day_id,
             numericality: { other_than: 1, message: "can't be blank" }
   with_options presence: true, format: { with: /\A[0-9]+\z/ } do
