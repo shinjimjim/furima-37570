@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        lastname: 苗字
+        firstname: 名前
+        lastname_reading: 苗字カナ
+        firstname_reading: 名前カナ
+        birthday: 誕生日
+      item:
+        images: 画像
+        name: 商品名
+        content: 商品の説明
+        category_id: カテゴリー
+        condition_id: 商品の状態
+        burden_id: 配送料の負担
+        prefecture_id: 発送の地域
+        delivery_day_id: 発送までの日数
+        price: 価格
+      buy_address:
+        city: 市区町村
+        house_number: 番地
+        postal_code: 郵便棒号
+        telephone_number: 電話番号
+        prefecture_id: 都道府県
+        token: クレジットカード情報
